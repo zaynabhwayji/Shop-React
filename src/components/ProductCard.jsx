@@ -1,10 +1,13 @@
-function ProductCard() {
+function ProductCard({ product , onAddToCart}) {
     return (
-        <div className="card">
-            <span className="emoji">■</span>
-            <h3>Classic T-Shirt</h3>
-            <p>$19.99</p>
-            <button>Add to Cart</button>
+        <div className="product-card">
+            <span className="emoji" >{product.emoji}</span>
+            <h3>{product.name}</h3>
+            <p className="product-price">
+                <span>${product.price}</span>
+                <span className="category">{product.category}</span>
+                <button className="add-btn"  onClick={() => onAddToCart(product)}>+Cart</button>
+                </p>
         </div>
     );
 }
