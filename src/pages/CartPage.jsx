@@ -1,6 +1,7 @@
 import CartItem from '../components/CartItem';
-
-function CartPage({ cart, onAddToCart, onRemoveFromCart, ClearCart, CheckOut }) {
+import { useCart } from '../context/CartContext';
+function CartPage() {
+    const { cart, addToCart, removeFromCart, clearCart, checkout, totalItems, totalPrice } = useCart();
     return (
         <div className="cart-page">
             <h2>Your Cart</h2>
@@ -12,16 +13,14 @@ function CartPage({ cart, onAddToCart, onRemoveFromCart, ClearCart, CheckOut }) 
                     <CartItem
                         key={item.id}
                         product={item}
-                        onAddToCart={onAddToCart}
-                        onRemoveFromCart={onRemoveFromCart}
                     />
                 ))
             )}
             <span className="cart-total">
-                Total: ${cart.reduce((total, item) => total + item.price * item.qty, 0)}
+                Total: ${totalPrice.toFixed(2)}
             </span>
-            <button onClick={ClearCart}>Clear Cart</button>
-            <button onClick={CheckOut}>Checkout</button>
+            <button onClick={clearCart}>Clear Cart</button>
+            <button onClick={checkout}>Checkout</button>
         </div>
     );
 }

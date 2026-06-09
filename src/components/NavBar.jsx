@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-function NavBar({ cartCount, onCartClick }) {
+import { useCart } from '../context/CartContext';
+function NavBar({ onCartClick }) {
+    const { totalItems } = useCart();
     return (
         <nav className="navbar">
             <div className="logo">■ ShopReact</div>
@@ -12,7 +14,7 @@ function NavBar({ cartCount, onCartClick }) {
             </div>
             <Link to="/cart"  onClick={() => onCartClick(true)}>
                 <button className="cart-btn">
-                    ■ Cart ({cartCount})
+                    ■ Cart ({totalItems})
                 </button>
             </Link>
         </nav>

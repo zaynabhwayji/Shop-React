@@ -1,6 +1,6 @@
 import ProductCard from '../components/ProductCard';
 
-function ShopPage({ filtered, addToCart, search, setSearch, setActiveCategory }) {
+function ShopPage({ filtered, search, setSearch, setActiveCategory }) {
     return (
         <>
             <div className="filters">
@@ -16,9 +16,7 @@ function ShopPage({ filtered, addToCart, search, setSearch, setActiveCategory })
                 {filtered.map(product => (
                     <ProductCard
                         key={product.id}
-                        product={product}
-                        onAddToCart={addToCart}
-                    />
+                        product={product}/>
                 ))}
             </div>
         </>
