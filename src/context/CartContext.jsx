@@ -14,15 +14,6 @@ export function CartProvider({ children }) {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    const cartCount = cart.reduce(
-        (total, item) => total + item.qty,
-        0
-    );
-
-    useEffect(() => {
-        document.title = `Cart (${cartCount})`;
-    }, [cartCount]);
-
     function addToCart(product) {
         const existing = cart.find(item => item.id === product.id);
         if (existing) {
@@ -49,10 +40,14 @@ export function CartProvider({ children }) {
     
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  useEffect(() => {
+        document.title = `Cart (${totalItems})`;
+    }, [totalItems]);
     // 3. Expose everything components need
     return (
         <CartContext.Provider value={{
-            cart, addToCart, removeFromCart, clearCart, checkout, totalItems, totalPrice, cartCount
+            cart, addToCart, removeFromCart, clearCart, checkout, totalItems, totalPrice
         }}>
             {children}
         </CartContext.Provider>
